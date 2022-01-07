@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using Domain.Common;
+﻿using Domain.Common;
+using System;
 
 namespace Domain.Entities
 {
@@ -10,8 +9,12 @@ namespace Domain.Entities
         public string Barcode { get; set; }
         public decimal? Rate { get; set; }
         public string Description { get; set; }
-        public DateTime? CreatedDate { get; set; } = null;
 
         public int CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool IsDeleted { get; set; } = false;
     }
 }
