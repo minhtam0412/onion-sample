@@ -1,17 +1,12 @@
+using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Application;
 using Microsoft.OpenApi.Models;
+using Persistence;
 
 namespace WebApi
 {
@@ -38,9 +33,17 @@ namespace WebApi
                     Title = "Onion Architecture"
                 });
             });
-            #endregion
+
+            #endregion Swagger
 
             services.AddApplication();
+            services.AddPersistence(Configuration);
+            services.AddApiVersioning(x =>
+            {
+                x.DefaultApiVersion = new ApiVersion(1, 0);
+                x.AssumeDefaultVersionWhenUnspecified = true;
+                x.ReportApiVersions = true;
+            });
             services.AddControllers();
         }
 
@@ -52,6 +55,12 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
             #region Swagger
 
             app.UseSwagger();
@@ -59,13 +68,8 @@ namespace WebApi
             {
                 x.SwaggerEndpoint(@"/swagger/v1/swagger.json", "OnionArchitecture");
             });
-            #endregion
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
+            #endregion Swagger
 
             app.UseEndpoints(endpoints =>
             {
