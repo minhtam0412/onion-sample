@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.22">
       <PrivateAssets>all</PrivateAssets>

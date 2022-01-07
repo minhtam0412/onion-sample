@@ -7,3 +7,4 @@
 /OnionArchitecture/Application/obj
 /OnionArchitecture/Application/bin
 /OnionArchitecture/.vs
+/OnionArchitecture/WebApi/Properties/PublishProfiles/*.user
